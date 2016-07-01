@@ -1,14 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Hero } from './hero';
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from './hero.service';
 
-
-constructor(private heroService: HeroService) { }
-
 @Component({
   selector: 'my-app',
-  template:`
+  template: `
     <h1>{{title}}</h1>
     <h2>My Heroes</h2>
     <ul class="heroes">
@@ -20,7 +17,7 @@ constructor(private heroService: HeroService) { }
     </ul>
     <my-hero-detail [hero]="selectedHero"></my-hero-detail>
   `,
-  styles:[`
+  styles: [`
     .selected {
       background-color: #CFD8DC !important;
       color: white;
@@ -70,13 +67,19 @@ constructor(private heroService: HeroService) { }
     }
   `],
   directives: [HeroDetailComponent],
-  heroes: Hero[],
   providers: [HeroService]
 })
-export class AppComponent {
-  title = 'Tour of Heroes';
-  heroes = HEROES;
-  selectedHero: Hero;
 
+export class AppComponent implements OnInit {
+  title = 'Tour of Heroes';
+  heroes: Hero[];
+  selectedHero: Hero;
+  constructor(private heroService: HeroService) { }
+  getHeroes() {
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+  }
+  ngOnInit() {
+    this.getHeroes();
+  }
   onSelect(hero: Hero) { this.selectedHero = hero; }
 }
