@@ -1,20 +1,18 @@
 import { Component } from '@angular/core';
-import { HeroService } from './hero.service';
-import { HeroesComponent } from './heroes.component';
-
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { HeroService }     from './hero.service';
 @Component({
   selector: 'my-app',
   template: `
-  <h1>{{title}}</h1>
-  <a [routerLink]="['/heroes']">Heroes</a>
-  <router-outlet></router-outlet>
+    <h1>{{title}}</h1>
+    <a [routerLink]="['/heroes']">Heroes</a>
+    <router-outlet></router-outlet>
   `,
-  directives: [HeroesComponent],
-  providers: [HeroService]
+  directives: [ROUTER_DIRECTIVES],
+  providers: [
+    HeroService
+  ]
 })
-
-
 export class AppComponent {
-  title = "Tour of heroes";
-
+  title = 'Tour of Heroes';
 }
