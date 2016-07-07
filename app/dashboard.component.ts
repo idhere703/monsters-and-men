@@ -7,7 +7,7 @@ import { HeroService } from './hero.service';
   templateUrl: 'app/dashboard.component.html'
 })
 
-export class DashboardComponent impements OnInit {
+export class DashboardComponent implements OnInit {
 
   heroes: Hero[] = [];
   constructor(private heroService: HeroService) { }
